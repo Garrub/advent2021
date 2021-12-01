@@ -1,7 +1,8 @@
 {
   "name": "advent2021",
   "version": "1.0.0",
-  "description": "",
+  "description": "advent of code 2021 tracker",
+  "type": "module",
   "main": "sonarSweep.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
