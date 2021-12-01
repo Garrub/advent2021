@@ -32,4 +32,7 @@ let sonarSweep2 = (readout) => {
   return count;
 };
 
+let ss2FunLiner = (readout) => parse(readout).reduce((tracker, current, i, list) => ({count: tracker.count += current + list[i + 1] + list[i + 2] > tracker.prev ? 1 : 0, prev: current + list[i + 1] + list[i + 2]}), {prev: -1, count: -1}).count;
+
 console.log('part 2: ', sonarSweep2(input));
+console.log('past 2 funLiner: ', ss2FunLiner(input));
