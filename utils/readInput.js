@@ -1,8 +1,8 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
+const {readFileSync} = require('fs');
+const {join} = require('path');
 
-export default function readInput(filename) {
-  const __dirname = resolve();
+
+module.exports = function readInput(filename) {
   if (filename.substring(filename.length - 4) !== '.txt') filename += '.txt';
-  return readFileSync(resolve(__dirname, '..', 'inputs', filename), 'utf-8');
+  return readFileSync(join(__dirname, '..', 'inputs', filename), 'utf-8');
 }

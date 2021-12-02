@@ -33,6 +33,9 @@ const sonarSweep2 = (readout) => {
 };
 
 const ss2FunLiner = (readout) => parse(readout).reduce((tracker, cur, i, list) => ({count: tracker.count += list[i + 2] > tracker.loss ? 1 : 0, loss: cur}), {loss: -1, count: -1}).count;
+let p = parse;
+let f=r=>p(r).reduce((t,c,i,a)=>({s:t.s+=a[i+2]>t.l?1:0,l:c}),{l:-1,s:-1}).s;
 
 console.log('part 2: ', sonarSweep2(input));
 console.log('past 2 funLiner: ', ss2FunLiner(input));
+console.log('part 2 code golf: ', f(input));
