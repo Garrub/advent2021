@@ -1,8 +1,8 @@
-import input from "./input.js";
+const readInput = require('../utils/readInput.js');
+const input = readInput('sonarSweep');
+const parse = (list) => list.trim().split('\n').map(depth => Number(depth));
 
-let parse = (list) => list.trim().split('\n').map(depth => Number(depth));
-
-let sonarSweep = (readout) => {
+const sonarSweep = (readout) => {
   let depths = parse(readout);
   let count = 0;
   for (let i = 1; i < depths.length; i++) {
@@ -17,7 +17,7 @@ let sonarSweep = (readout) => {
 
 console.log('part 1: ', sonarSweep(input));
 
-let sonarSweep2 = (readout) => {
+const sonarSweep2 = (readout) => {
   let depths = parse(readout);
   if (depths.length < 4) return 0;
   let count = 0;
@@ -32,7 +32,7 @@ let sonarSweep2 = (readout) => {
   return count;
 };
 
-let ss2FunLiner = (readout) => parse(readout).reduce((tracker, cur, i, list) => ({count: tracker.count += list[i + 2] > tracker.loss ? 1 : 0, loss: cur}), {loss: -1, count: -1}).count;
+const ss2FunLiner = (readout) => parse(readout).reduce((tracker, cur, i, list) => ({count: tracker.count += list[i + 2] > tracker.loss ? 1 : 0, loss: cur}), {loss: -1, count: -1}).count;
 
 console.log('part 2: ', sonarSweep2(input));
 console.log('past 2 funLiner: ', ss2FunLiner(input));
