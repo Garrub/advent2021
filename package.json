@@ -2,7 +2,6 @@
   "name": "advent2021",
   "version": "1.0.0",
   "description": "advent of code 2021 tracker",
-  "type": "module",
   "main": "sonarSweep.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Garrub/advent2021/issues"
   },
-  "homepage": "https://github.com/Garrub/advent2021#readme"
+  "homepage": "https://github.com/Garrub/advent2021#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
 }
