@@ -1,7 +1,5 @@
 const readInput = require('../utils/readInput');
 const input = readInput('bingo');
-console.log(input.split('\n\n')[1].split('\n')[1].split(/ +/));
-//console.log(input.split('\n\n'));
 
 const getBoardIndex = (board) => {
   const lines = board.split('\n').map(line => line.trim().split(/ +/));
@@ -25,8 +23,6 @@ const parseInput = raw => {
   const list = raw.split('\n\n');
   const nums = list[0].split(',');
   const boards = list.slice(1).map(strBoard => getBoardIndex(strBoard));
-  console.log(list.slice(1)[0])
-  console.log(boards[0]);
   return {nums, boards};
 };
 
