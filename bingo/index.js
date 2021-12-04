@@ -27,8 +27,8 @@ const parseInput = raw => {
 };
 
 //defaults to finding first winning board (part 1)
-//pass 'lose' for mode arg to find last winning board (part 2)
-const bingo = (rawInput, mode = 'win') => {
+//pass true for part2 arg to find last winning board (part 2)
+const bingo = (rawInput, part2 = false) => {
   let {nums, boards} = parseInput(rawInput);
   let lastWinning = {board: null, num: null};
   for (let num of nums) {
@@ -45,7 +45,7 @@ const bingo = (rawInput, mode = 'win') => {
       board.countDown.row[row]--;
       board.countDown.col[col]--;
       if (board.countDown.row[row] === 0 || board.countDown.col[col] === 0) {
-        if (mode !== 'lose') return parseInt(num) * board.unmarkedSum;
+        if (!part2) return parseInt(num) * board.unmarkedSum;
         board.won = true;
         lastWinning = {board, num};
       }
