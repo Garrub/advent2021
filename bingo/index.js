@@ -5,6 +5,7 @@ const getBoardIndex = (board) => {
   const lines = board.split('\n').map(line => line.trim().split(/ +/));
   const index = {
     unmarkedSum: 0,
+    /* when countdown hits 0, thats a bingo */
     countDown: {
       row: new Array(lines.length).fill(lines[0].length),
       col: new Array(lines[0].length).fill(lines.length),
@@ -26,17 +27,13 @@ const parseInput = raw => {
   return {nums, boards};
 };
 
-//defaults to finding first winning board (part 1)
-//pass true for part2 arg to find last winning board (part 2)
-const bingo = (rawInput, part2 = false) => {
+const bingo = (rawInput) => {
   let {nums, boards} = parseInput(rawInput);
-  let lastWinning = {board: null, num: null};
+  let part1;
+  let part2;
   for (let num of nums) {
     for (let board of boards) {
-      if (board.won) {
-        continue;
-      }
-      if (board[num] === undefined) {
+      if (board.won || !board[num]) {
         continue;
       }
       board.unmarkedSum -= parseInt(num);
@@ -45,16 +42,14 @@ const bingo = (rawInput, part2 = false) => {
       board.countDown.row[row]--;
       board.countDown.col[col]--;
       if (board.countDown.row[row] === 0 || board.countDown.col[col] === 0) {
-        if (!part2) return parseInt(num) * board.unmarkedSum;
         board.won = true;
-        lastWinning = {board, num};
+        part1 ??= parseInt(num) * board.unmarkedSum;
+        part2 = parseInt(num) * board.unmarkedSum;
       }
     }
   }
-  return parseInt(lastWinning.num) * lastWinning.board.unmarkedSum;
+  return {part1, part2};
 };
 
-console.log('part 1: ', bingo(input));
-console.log('part 2: ', bingo(input, 'lose'));
-
+console.log(bingo(input));
 
