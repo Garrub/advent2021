@@ -1,4 +1,3 @@
-const { ENXIO } = require('constants');
 const readInput = require('../utils/readInput');
 const input = readInput('hydrothermalVenture');
 const testInput = readInput('d5test');
@@ -18,12 +17,12 @@ const traverseSegment = (x, y, cb, allowDiag = false) => {
   if (!allowDiag && (i !== end.x) && (j !== end.y)) {
     return;
   }
+  const adjust = {
+    x: i === end.x ? 0 : (i < end.x ? 1 : -1),
+    y: j === end.y ? 0 : (j < end.y ? 1 : -1),
+  }
   do {
     cb(i, j);
-    let adjust = {
-      x: i === end.x ? 0 : (i < end.x ? 1 : -1),
-      y: j === end.y ? 0 : (j < end.y ? 1 : -1),
-    }
     i += adjust.x;
     j += adjust.y;
   } while ((i !== end.x) || (j !== end.y));
