@@ -21,11 +21,11 @@ const traverseSegment = (x, y, cb, allowDiag = false) => {
     x: i === end.x ? 0 : (i < end.x ? 1 : -1),
     y: j === end.y ? 0 : (j < end.y ? 1 : -1),
   }
-  do {
+  while ((i !== end.x) || (j !== end.y)) {
     cb(i, j);
     i += adjust.x;
     j += adjust.y;
-  } while ((i !== end.x) || (j !== end.y));
+  }
   //hacky: ensure last square gets marked
   cb(i, j);
 };
