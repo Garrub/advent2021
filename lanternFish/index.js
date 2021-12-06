@@ -1,7 +1,7 @@
-const { count } = require('console');
 const readInput = require('../utils/readInput');
 const input = readInput('lanternFish');
 const test = readInput('d6test');
+//turn array of fish into map of initial countdowns and how many fish have that countdown
 const parse = raw => raw.split(',').reduce((sum, cur) => ({...sum, [cur]: !sum[cur] ? 1 : sum[cur] + 1}), {});
 
 const getFishCountAt = (countdown, days, fishCount) => {
@@ -14,7 +14,6 @@ const getFishCountAt = (countdown, days, fishCount) => {
   return fishCount[countdown][days];
 }
 
-//console.log(parse(test));
 const lanternFish = (raw, days) => {
   let fishCount = {};
   const fish = parse(raw);
