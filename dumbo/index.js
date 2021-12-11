@@ -36,7 +36,6 @@ const flash = (cell, grid, cb) => {
   cb();
   cell.adjs.forEach(([x, y]) => {
     let adj = grid[x][y];
-    if (!adj) debugger;
     adj.val++;
     if (adj.val > 9) {
       flash(adj, grid, cb);
