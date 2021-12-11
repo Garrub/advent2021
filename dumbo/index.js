@@ -11,8 +11,8 @@ const getAdjacents = (row, col, rowCount, colCount) => {
     for (let j = 0; j < offset.length; j++) {
       if (offset[i] === 0 && offset[j] === 0) continue;
       let x = row + offset[i];
-      let y = col + offset[j];
       if (x < 0 || x >= rowCount) continue;
+      let y = col + offset[j];
       if (y < 0 || y >= colCount) continue;
       adjacents.push([x, y]);
     }
@@ -67,14 +67,12 @@ const solve = (raw, cycles) => {
   let part1 = null;
   let part2 = null;
   let grid = getMatrixGraph(parse(raw));
-  let i = 0;
-  while (part1 === null || part2 === null) {
+  for (let i = 1; part1 === null || part2 === null; i++) {
     step(grid, () => count++, octoGrid => {
       if (octoGrid.every(octoLine => octoLine.every(octo => octo.flashed))) {
-        part2 = i + 1;
+        part2 = i;
       }
     });
-    i++;
     if (i === cycles) part1 = count;
   }
   return {part1, part2};
