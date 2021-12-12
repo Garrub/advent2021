@@ -32,13 +32,15 @@ const solve = raw => {
     paths[end] ??= new Set();
     paths[start].add(end);
     paths[end].add(start);
-    if (start !== 'start' && start === start.toLowerCase()) {
+    if (start === start.toLowerCase()) {
       smalls.add(start);
     }
-    if (end !== 'end' && end === end.toLowerCase()) {
+    if (end === end.toLowerCase()) {
       smalls.add(end);
     }
   });
+  smalls.delete('start');
+  smalls.delete('end');
   let avoid = new Set();
   let allPaths = new Set();
   let part1 = 0;
@@ -46,8 +48,10 @@ const solve = raw => {
   for (let small of smalls) {
     traversePaths(paths, 'start', avoid, 'start', (foundPath) => allPaths.add(foundPath), small);
   }
-  let part2 = allPaths.size;
-  return {part1, part2};
+  return {
+    part1,
+    part2: allPaths.size,
+  };
 };
 
 console.log('should be 226, 3509: ', solve(test));
